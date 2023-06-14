@@ -10,6 +10,6 @@ complete_genes = numpy.array([[ 2,   'b1702'],
                               [ 9,   'b2297'],
                               [10,   'b2296'],
                               [11,   'b1241'],
-                              [12,   'b4154']])
+                              [12,   'b4154']], 'object')
 
 numpy.save(open('complete_genes.npy', 'wb'), complete_genes)

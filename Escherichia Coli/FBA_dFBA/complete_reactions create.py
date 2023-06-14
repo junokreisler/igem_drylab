@@ -10,6 +10,6 @@ complete_reactions = numpy.array([[ 2,   'PPS'   ],
                                   [10,   'ACKr'  ],
                                   [11,   'ALCD2x'],
                                   [12.0, 'FRD2'  ],
-                                  [12.1, 'FRD3'  ]])
+                                  [12.1, 'FRD3'  ]], 'object')
 
 numpy.save(open('complete_reactions.npy', 'wb'), complete_reactions)
