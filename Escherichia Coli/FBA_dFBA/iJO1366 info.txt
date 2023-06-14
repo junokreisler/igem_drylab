@@ -1,0 +1,7 @@
+Species:   Escherichia coli
+Strain:    K-12
+Substrain: MG1655
+
+Database:  BiGG
+Model:     iJO1366
+Page:      http://bigg.ucsd.edu/models/iJO1366
