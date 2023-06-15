@@ -1,6 +1,6 @@
 # **Reaction deletions comparison in Escherichia coli K-12 for D-lactate over production in anerobic conditions**
 
-## **Redirectioning of the flux towards D-lactate in the pyruvate metabolism in order to select essential (and non elsewhere interfering) genes to knockout**
+## **Redirectioning of the flux towards D-lactate in the pyruvate metabolism in order to select essential (and elsewhere non interfering) genes to knockout**
 
 ---
 
