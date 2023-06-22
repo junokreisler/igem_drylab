@@ -50,6 +50,20 @@ phosphoenolpyruvate synthase (pps) are also in the competing routes,
 the deletions of these genes in wild type E. coli unfavourably affected lactate 
 accumulation during the aerobic and oxygen-limited two-phase fermentation.
 
+Evaluate effects of poxB, dld, frdA, adhE, pps, *ppc*
+
+Note that ppsA has a regulatory protein ppsR (gene b1703) which is
+not present in the FBA model. 
+Therefore, knocking down b1703 might be helpful so that amino acids are
+not wasted on a regulatory protein which won't have anything to work on.
+
+
+> The single-gene deletion of phosphoenolpyruvate carboxylase (ppc) 
+> significantly improved the lactate yield from glucose (by about 27-fold) 
+> under microaerobic conditions with merely trace generation of succinate, 
+> but the cells barely grew on the minimal media when glucose was used as 
+> the sole carbon source, which is unfavourable in large scale fermentation.
+
 ### Effects of multiple gene deletions
 
 
