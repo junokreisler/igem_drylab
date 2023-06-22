@@ -44,4 +44,6 @@ Contains the list of all optimal biomasses sequentially.
 
 ### • consumed_lactates.npy
 
+Did it work?
+
 Contains the list of all consumed lactate fluxes as the inward flux from the environmental d-lactate exchange reaction.
