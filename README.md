@@ -1,5 +1,4 @@
-# igem_drylab
-iGEM Team UZH-ETH 2023 Dry Lab Practice/Sandbox
+# iGEM UZH-ETH 2023 Dry Lab Sandbox
 
 iGEM Dry Lab team: junokreisler, giuliocaflisch, darthnius
 
