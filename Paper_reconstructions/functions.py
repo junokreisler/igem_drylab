@@ -30,3 +30,15 @@ def list_rxn_obj(rxn_list, model = EC_model):
         print("added rxn object", rxn)
 
     return rxn_obj
+
+def gene_rxn_ko_res(gene_or_rxn, list_of_str, model = EC_model):
+    # knocks out the gene(s) or reaction(s) of choice, saves results
+    try:
+        if gene_or_rxn == "gene":
+            # save boundaries on gene reacts, do KO, reset boundaries
+        if gene_or_rxn == "reaction" or "rxn":
+            # save boundaries on reacts, do KO, reset boundaries
+    except ValueError:
+        print("gene_or_rxn should be 'gene' for gene KOs and 'reaction' or 'rxn' for reaction KOs. \n")
+
+    return 0 # solution object, print EX_Lac__D_e"

@@ -10,16 +10,18 @@ EC_model.reactions.get_by_id("EX_lac__D_e").lower_bound = -1000
 
 ##  single genes to knock out, taken from the section in the paper
 
-genes_single = ["b0902", "b0903",                        # pflA, pflB pyruvate formate lyase subunits A and B
-                "b2296",                                 # ackA acetate kinase A
-                "b2297",                                 # pta phosphate acetyltransferase
-                "b0871",                                 # poxB pyruvate oxidase
-                "b2133",                                 # dld FAD-binding D-lactate dehydrogenase,
-                                                         # ...required for aerobic growth on D-lactate
-                "b2297",                                 # adhE alcohol dehydrogenase
-                "b1702",                                 # pps PEP synthase
-                "b3956"                                  # ppc PEP carboxylase
-                ]
+gene_annot = {"b0902":                        "pflA pyruvate formate lyase subunit A"  ,
+              "b0903":                        "pflB pyruvate formate lyase subunit B"  ,
+              "b2296":                        "ackA acetate kinase A"                  ,
+              "b2297":                        "pta phosphate acetyltransferase"        ,
+              "b0871":                        "poxB pyruvate oxidase"                  ,
+              "b2133":                        "dld FAD-binding D-lactate dehydrogenase",
+              "b1241":                        "adhE alcohol dehydrogenase"             ,
+              "b1702":                        "pps PEP synthase"                           ,
+              "b3956":                        "ppc PEP carboxylase"
+             }
+
+genes_single = list(gene_annot.keys())
 
 # find knockdown reactions
 rxn_list = []
@@ -37,7 +39,9 @@ cobra.flux_analysis.single_reaction_deletion(EC_model, rxn_obj)
 
 # try to manually change flux bounds
 
-EC_model.genes.get_by_id(genes_single[0]).knock_out()
-EC_model.optimize()
+EC
 
-cobra.flux_analysis.double_
+EC_model.gene_obj[1].knock_out()
+EC_model.optimize().fluxes["EX_lac__D_e"]
+
+
