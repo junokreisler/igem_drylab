@@ -4,6 +4,17 @@ import cobra
 # Helper functions for analysis of the model
 #########################
 
+gene_annot = {"b0902":                        "pflA pyruvate formate lyase subunit A"  ,
+              "b0903":                        "pflB pyruvate formate lyase subunit B"  ,
+              "b2296":                        "ackA acetate kinase A"                  ,
+              "b2297":                        "pta phosphate acetyltransferase"        ,
+              "b0871":                        "poxB pyruvate oxidase"                  ,
+              "b2133":                        "dld FAD-binding D-lactate dehydrogenase",
+              "b1241":                        "adhE alcohol dehydrogenase"             ,
+              "b1702":                        "pps PEP synthase"                           ,
+              "b3956":                        "ppc PEP carboxylase"
+             }
+
 EC_model = cobra.io.read_sbml_model('Paper_reconstructions/EC_model.xml')
 def list_rxns_of_gene(gene_str, model = EC_model):
     # finds the reactions which are regulated by the gene of interest.
@@ -31,14 +42,26 @@ def list_rxn_obj(rxn_list, model = EC_model):
 
     return rxn_obj
 
-def gene_rxn_ko_res(gene_or_rxn, list_of_str, model = EC_model):
+def gene_ko_res(str_of, model):
     # knocks out the gene(s) or reaction(s) of choice, saves results
-    try:
-        if gene_or_rxn == "gene":
-            # save boundaries on gene reacts, do KO, reset boundaries
-        if gene_or_rxn == "reaction" or "rxn":
-            # save boundaries on reacts, do KO, reset boundaries
-    except ValueError:
-        print("gene_or_rxn should be 'gene' for gene KOs and 'reaction' or 'rxn' for reaction KOs. \n")
+    print('=======================================')
+    print(gene_annot[str_of].upper())
+    print('=======================================')
+    func_rxns = list_rxns_of_gene(str_of)
+    print("Reactions of", str_of,":", func_rxns)
+    print('=======================================')
+    prev_boundaries = [] # ub1,lb1,ub2,lb2,ub3,lb3...
+    # save boundaries and KO
+    for rxn in func_rxns:
+        curr_rxn = rxn
+        print(rxn)
+        ub = model.reactions.get_by_id("PFL").upper_bound
+        lb = model.reactions.get_by_id("PFL").lower_bound
+        print("Previous boundaries saved, knocking out...")
+        model.reactions.get_by_id("PFL").upper_bound = 0
+        model.reactions.get_by_id("PFL").lower_bound = 0
 
-    return 0 # solution object, print EX_Lac__D_e"
+    # obtain solution
+    solution = model.optimize()
+    print("lactate flux after knock out of", str_of, ":", solution.fluxes["EX_lac__D_e"])
+    return solution# solution object, print EX_Lac__D_e"

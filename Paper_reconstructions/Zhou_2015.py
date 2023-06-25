@@ -3,7 +3,6 @@ from functions import *
 
 # read anaerobic model
 EC_model = cobra.io.read_sbml_model('Paper_reconstructions/EC_model.xml')
-
 EC_model.reactions.get_by_id("EX_lac__D_e").lower_bound = -1000
 
 ### Effects of single gene deletion
@@ -29,19 +28,29 @@ for gene in genes_single:
     rxn_list += list_rxns_of_gene(gene_str = gene)
     rxn_list = list(set(rxn_list))
 
-# idk why this doesn't work
 gene_obj = list_gene_obj(genes_single)
-cobra.flux_analysis.single_gene_deletion(EC_model, gene_obj)
+# CAUSES INFINITE LOOP, DON'T RUN
+#biomass_w_single_knockout = cobra.flux_analysis.single_gene_deletion(EC_model, gene_obj)
 
 # neither does this work
 rxn_obj = list_rxn_obj(rxn_list)
-cobra.flux_analysis.single_reaction_deletion(EC_model, rxn_obj)
+#cobra.flux_analysis.single_reaction_deletion(EC_model, rxn_obj)
 
 # try to manually change flux bounds
+EC_model = cobra.io.read_sbml_model('Paper_reconstructions/EC_model.xml')
+EC_model.reactions.get_by_id("EX_lac__D_e").lower_bound = -1000
 
-EC
+#test = gene_ko_res(genes_single[0], model = EC_model)
+with open("Paper_reconstructions/lactate_biomass_solutions.txt", 'w') as f:
+    sol_list = []
+    f.write('The results were obtained from single gene knock-outs based on suggestions from the Zhou et al 2015 paper.\n')
+    f.write('The results are representative of growth under anaerobic conditions.\n')
+    for gene in genes_single:
+        gene_now = gene
+        EC_model.genes.get_by_id(gene_now).knock_out()
+        sol_list.append(EC_model.optimize())
+        print(gene_annot[gene],"knocked out ||| Lactate balance: ", sol_list[-1].fluxes["EX_lac__D_e"], "||| biomass: ", sol_list[-1].objective_value)
+        f.write(gene_annot[gene]+" knocked out ||| Lactate balance: " + str(sol_list[-1].fluxes["EX_lac__D_e"])+" ||| biomass: "+str(sol_list[-1].objective_value)+"\n")
+        EC_model.genes.get_by_id(gene_now).functional = True
 
-EC_model.gene_obj[1].knock_out()
-EC_model.optimize().fluxes["EX_lac__D_e"]
-
-
+### Effects of
